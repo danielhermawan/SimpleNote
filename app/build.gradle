@@ -4,19 +4,23 @@ apply plugin: 'kotlin-android'
 
 apply plugin: 'kotlin-android-extensions'
 
+apply plugin: 'kotlin-kapt'
+
 android {
-    compileSdkVersion 27
+    compileSdkVersion buildInfo.compileSdk
     defaultConfig {
-        applicationId "co.folto.simplenote"
-        minSdkVersion 16
-        targetSdkVersion 27
-        versionCode 1
-        versionName "1.0"
+        applicationId buildInfo.appId
+        minSdkVersion buildInfo.minSdk
+        targetSdkVersion buildInfo.targetSdk
+        versionCode buildInfo.versionCode
+        versionName buildInfo.versionName
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
+        vectorDrawables.useSupportLibrary = true
     }
     buildTypes {
         release {
-            minifyEnabled false
+            minifyEnabled true
+            useProguard true
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
         }
     }
@@ -24,10 +28,59 @@ android {
 
 dependencies {
     implementation fileTree(dir: 'libs', include: ['*.jar'])
-    implementation"org.jetbrains.kotlin:kotlin-stdlib-jre7:$kotlin_version"
-    implementation 'com.android.support:appcompat-v7:27.0.2'
-    implementation 'com.android.support.constraint:constraint-layout:1.0.2'
-    testImplementation 'junit:junit:4.12'
-    androidTestImplementation 'com.android.support.test:runner:1.0.1'
-    androidTestImplementation 'com.android.support.test.espresso:espresso-core:3.0.1'
+
+    // Android first party libraries
+    implementation libraries.kotlinStdlib
+    implementation libraries.appCompat
+    implementation libraries.recyclerView
+    implementation libraries.design
+    implementation libraries.vector
+    implementation libraries.constraintLayout
+    implementation libraries.annotations
+
+    // architecture component libraries
+    implementation libraries.lifecycle
+    kapt libraries.lifecycleCompiler
+    implementation libraries.livedataStream
+
+    // room libraries
+    implementation libraries.room
+    implementation libraries.roomRxjava
+
+    // dagger libraries
+    implementation libraries.daggerAndroid
+    implementation libraries.daggerAndroidSupport
+    kapt libraries.daggerProcessor
+    kapt libraries.daggerCompiler
+
+    // rx libraries
+    implementation libraries.rxjava
+    implementation libraries.rxandroid
+    implementation libraries.rxkotlin
+    implementation libraries.rxRelay
+
+    // network libraries
+    implementation libraries.okhttp
+    implementation libraries.retrofit
+    implementation libraries.retrofitGsonConverter
+    implementation libraries.retrofitRxjava
+    implementation libraries.retrofitLogging
+
+    implementation libraries.glide
+    kapt libraries.glideCompiler
+
+    implementation libraries.stetho
+    implementation libraries.stethoOkhttp
+
+    implementation libraries.timber
+    implementation libraries.joda
+    implementation libraries.androidJob
+
+    // Testing libraries
+    testImplementation libraries.junit
+    testImplementation libraries.arcTesting
+    testImplementation libraries.roomTesting
+    androidTestImplementation libraries.testRunner
+    androidTestImplementation libraries.espressoCore
+
 }

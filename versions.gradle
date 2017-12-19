@@ -1,0 +1,108 @@
+ext.addRepos = { RepositoryHandler handler ->
+    handler.google()
+    handler.jcenter()
+    handler.maven { url 'https://oss.sonatype.org/content/repositories/snapshots' }
+}
+
+def versions = [
+        plugin   : [
+                androidGradle: "3.0.1",
+                kotlin       : "1.2.0"
+        ],
+        libraries: [
+                // code library
+                supportLibrary       : "27.0.2",
+                architectureComponent: "1.0.0",
+                constraintLayout     : "1.0.2",
+                dagger               : "2.13",
+                rxjava               : "2.1.7",
+                rxkotlin             : "2.2.0",
+                rxandroid            : "2.0.1",
+                rxRelay              : "2.0.0",
+                okhttp               : "3.9.1",
+                retrofit             : "2.3.0",
+                retrofitRxjava       : "2.3.0",
+                retrofitLogging      : "3.9.1",
+                stetho               : "1.5.0",
+                timber               : "4.6.0",
+                glide                : "4.4.0",
+                joda                 : "2.9.9.1",
+                androidJob           : "1.2.1",
+
+                // testing library
+                junit                : "4.12",
+                testRunner           : "1.0.1",
+                espressoCore         : "3.0.1"
+        ]
+]
+
+ext.buildInfo = [
+        appId      : "co.folto.simplenote",
+        minSdk     : 16,
+        compileSdk : 27,
+        targetSdk  : 27,
+        versionCode: 1,
+        versionName: "1.0"
+]
+
+ext.gradlePlugin = [
+        androidGradle: "com.android.tools.build:gradle:$versions.plugin.androidGradle",
+        kotlin       : "org.jetbrains.kotlin:kotlin-gradle-plugin:$versions.plugin.kotlin"
+]
+
+ext.libraries = [
+        // android core library
+        kotlinStdlib         : "org.jetbrains.kotlin:kotlin-stdlib-jre7:$versions.plugin.kotlin",
+        appCompat            : "com.android.support:appcompat-v7:$versions.libraries.supportLibrary",
+        recyclerView         : "com.android.support:recyclerview-v7:$versions.libraries.supportLibrary",
+        design               : "com.android.support:design:$versions.libraries.supportLibrary",
+        vector               : "com.android.support:support-vector-drawable:$versions.libraries.supportLibrary",
+        constraintLayout     : "com.android.support.constraint:constraint-layout:$versions.libraries.constraintLayout",
+        annotations          : "com.android.support:support-annotations:$versions.libraries.constraintLayout",
+
+        // android architecture component
+        lifecycle            : "android.arch.lifecycle:extensions:$versions.libraries.architectureComponent",
+        lifecycleCompiler    : "android.arch.lifecycle:compiler:$versions.libraries.architectureComponent",
+        livedataStream       : "android.arch.lifecycle:reactivestreams:$versions.libraries.architectureComponent",
+
+        // room
+        room                 : "android.arch.persistence.room:runtime:$versions.libraries.architectureComponent",
+        roomRxjava           : "android.arch.persistence.room:rxjava2:$versions.libraries.architectureComponent",
+
+        // dagger
+        daggerAndroid        : "com.google.dagger:dagger-android:$versions.libraries.dagger",
+        daggerAndroidSupport : "com.google.dagger:dagger-android-support:$versions.libraries.dagger",
+        daggerProcessor      : "com.google.dagger:dagger-android-processor:$versions.libraries.dagger",
+        daggerCompiler       : "com.google.dagger:dagger-compiler:$versions.libraries.dagger",
+
+        // rxjava
+        rxjava               : "io.reactivex.rxjava2:rxjava:$versions.libraries.rxjava",
+        rxandroid            : "io.reactivex.rxjava2:rxandroid:$versions.libraries.rxandroid",
+        rxkotlin             : "io.reactivex.rxjava2:rxkotlin:$versions.libraries.rxkotlin",
+        rxRelay              : "com.jakewharton.rxrelay2:rxrelay:$versions.libraries.rxRelay",
+
+        // network
+        okhttp               : "com.squareup.okhttp3:okhttp:$versions.libraries.okhttp",
+        retrofit             : "com.squareup.retrofit2:retrofit:$versions.libraries.retrofit",
+        retrofitGsonConverter: "com.squareup.retrofit2:converter-gson:$versions.libraries.retrofit",
+        retrofitRxjava       : "com.squareup.retrofit2:adapter-rxjava2:$versions.libraries.retrofitRxjava",
+        retrofitLogging      : "com.squareup.okhttp3:logging-interceptor:$versions.libraries.retrofitLogging",
+
+        glide                : "com.github.bumptech.glide:glide:$versions.libraries.glide",
+        glideCompiler        : "com.github.bumptech.glide:compiler:$versions.libraries.glide",
+
+        stetho               : "com.facebook.stetho:stetho:$versions.libraries.stetho",
+        stethoOkhttp         : "com.facebook.stetho:stetho-okhttp3:$versions.libraries.stetho",
+
+        timber               : "com.jakewharton.timber:timber:$versions.libraries.timber",
+        joda                 : "net.danlew:android.joda:$versions.libraries.joda",
+        androidJob           : "com.evernote:android-job:$versions.libraries.androidJob",
+
+        // testing library
+        junit                : "junit:junit:$versions.libraries.junit",
+        testRunner           : "com.android.support.test:runner:$versions.libraries.testRunner",
+        espressoCore         : "com.android.support.test.espresso:espresso-core:$versions.libraries.espressoCore",
+        arcTesting           : "android.arch.core:core-testing:$versions.libraries.architectureComponent",
+        roomTesting          : "android.arch.persistence.room:testing:$versions.libraries.architectureComponent"
+
+]
